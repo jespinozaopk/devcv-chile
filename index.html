@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Currículum Web | DevCV-Chile</title>
+  <meta name="description" content="Plantilla de Currículum Web y PDF en 1 página para estudiantes y desarrolladores.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      background-color: #f8fafc;
+      font-size: 11px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Barra superior de herramientas */
+    .top-actions {
+      max-width: 800px;
+      margin: 14px auto 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+    }
+    .badge-fork {
+      font-size: 11px;
+      color: #64748b;
+      text-decoration: none;
+    }
+    .badge-fork:hover { text-decoration: underline; color: #0f172a; }
+    .btn-pdf {
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 11.5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-pdf:hover { background: #334155; }
+
+    /* Hoja CV tamaño Letter / A4 */
+    .cv-sheet {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      background: #ffffff;
+      padding: 28px 34px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+    }
+
+    /* Encabezado */
+    .cv-header {
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .cv-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+    }
+    .cv-header .headline {
+      font-size: 12px;
+      color: #2563eb;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .cv-contact {
+      text-align: right;
+      font-size: 10.5px;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .cv-contact a {
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .cv-contact a:hover { text-decoration: underline; }
+
+    /* Grilla de 2 columnas */
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 1fr 235px;
+      gap: 24px;
+    }
+
+    /* Títulos de sección */
+    h2.sec-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #0f172a;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+
+    .sec-block { margin-bottom: 12px; }
+    .sec-block:last-child { margin-bottom: 0; }
+
+    /* Perfil */
+    .profile-bio {
+      color: #334155;
+      font-size: 10.8px;
+      text-align: justify;
+    }
+
+    /* Items de experiencia y proyectos */
+    .item { margin-bottom: 9px; }
+    .item:last-child { margin-bottom: 0; }
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .item-role {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .item-date {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .item-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #2563eb;
+      margin-bottom: 3px;
+    }
+    ul.item-bullets {
+      padding-left: 13px;
+      margin: 0;
+    }
+    ul.item-bullets li {
+      color: #334155;
+      font-size: 10.5px;
+      margin-bottom: 2.5px;
+    }
+
+    /* Tags de habilidades */
+    .tag-group-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #475569;
+      margin: 5px 0 3px;
+      text-transform: uppercase;
+    }
+    .tags-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .tag {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 1.5px 6px;
+      border-radius: 3px;
+    }
+    .tag-blue {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    /* Formato de impresión exacto a 1 hoja */
+    @media print {
+      body { background: #ffffff; }
+      .top-actions { display: none !important; }
+      .cv-sheet {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+      @page {
+        size: letter;
+        margin: 10mm 12mm;
+      }
+    }
+
+    /* Responsive móvil */
+    @media (max-width: 768px) {
+      .cv-sheet { padding: 20px 16px; margin: 10px; }
+      .cv-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .cv-contact { text-align: left; }
+      .cv-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-actions">
+    <a href="https://github.com/tu-usuario/devcv-chile" class="badge-fork" target="_blank">⭐ Plantilla Open Source: DevCV-Chile</a>
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF (1 Hoja)</button>
+  </div>
+
+  <div class="cv-sheet">
+
+    <!-- ENCABEZADO -->
+    <header class="cv-header">
+      <div>
+        <h1>Tu Nombre Completo</h1>
+        <div class="headline">Estudiante de Ingeniería Civil en Informática • Práctica Profesional</div>
+      </div>
+      <div class="cv-contact">
+        <div>Santiago, Chile • +56 9 1234 5678</div>
+        <div><a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a></div>
+        <div><a href="https://linkedin.com/in/tu-perfil" target="_blank">linkedin.com/in/tu-perfil</a> • <a href="https://github.com/tu-usuario" target="_blank">github.com/tu-usuario</a></div>
+      </div>
+    </header>
+
+    <!-- CUERPO -->
+    <div class="cv-grid">
+
+      <!-- COLUMNA PRINCIPAL -->
+      <main>
+        
+        <section class="sec-block">
+          <h2 class="sec-title">Perfil</h2>
+          <p class="profile-bio">
+            Estudiante de últimos años de Ingeniería Civil en Informática enfocado en desarrollo de software, tecnologías web y bases de datos. Con experiencia en proyectos prácticos full-stack y rápida capacidad para aprender nuevas tecnologías e integrarme en equipos ágiles.
+          </p>
+        </section>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Experiencia Técnica</h2>
+
+          <div class="item">
+            <div class="item-top">
+              <span class="item-role">Desarrollador Web Trainee</span>
+              <span class="item-date">Dic. 2024 – Feb. 2025</span>
+            </div>
+            <div class="item-sub">Nombre Empresa / Consultora</div>
+            <ul class="item-bullets">
+              <li>Desarrollo de módulos frontend y backend para plataforma web en producción utilizando <strong>PHP, JavaScript, HTML y CSS</strong>.</li>
+              <li>Gestión de base de datos relacional <strong>MySQL</strong>: creación de consultas optimizadas y modelado de datos.</li>
+              <li>Despliegue y administración de servidores y dominios mediante <strong>cPanel</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-top">
+              <span class="item-role">Soporte TI / Redes</span>
+              <span class="item-date">2023 – 2024</span>
+            </div>
+            <div class="item-sub">Servicios de Conectividad</div>
+            <ul class="item-bullets">
+              <li>Instalación y configuración de routers, puntos de acceso WiFi y cableado estructurado.</li>
+              <li>Diagnóstico y resolución de incidencias de conectividad de red local.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Proyectos Destacados</h2>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-role">Sistema de Gestión de Datos</span>
+              <span class="item-date">2024</span>
+            </div>
+            <div class="item-sub">Python • MySQL • Git</div>
+            <ul class="item-bullets">
+              <li>Desarrollo de aplicación orientada a objetos (POO) con persistencia en MySQL y control de versiones con Git/GitHub.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Experiencia Complementaria</h2>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-role">Atención al Cliente / Ventas</span>
+              <span class="item-date">2022 – 2023</span>
+            </div>
+            <div class="item-sub">Empresa Retail</div>
+            <ul class="item-bullets">
+              <li>Atención personalizada, resolución rápida de consultas bajo presión y trabajo en equipo.</li>
+            </ul>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- COLUMNA LATERAL -->
+      <aside>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Educación</h2>
+          <div class="item">
+            <div style="font-weight:700; color:#0f172a; font-size:11px;">Ing. Civil en Informática</div>
+            <div style="font-size:10.5px; color:#2563eb; font-weight:500;">Universidad Andrés Bello</div>
+            <div style="font-size:9.5px; color:#64748b;">2022 – 2026 (En curso)</div>
+          </div>
+        </section>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Conocimientos</h2>
+
+          <div class="tag-group-title">Lenguajes</div>
+          <div class="tags-box">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-blue">PHP</span>
+            <span class="tag tag-blue">JavaScript</span>
+            <span class="tag">C / C++</span>
+            <span class="tag">SQL</span>
+          </div>
+
+          <div class="tag-group-title">Web & Bases de Datos</div>
+          <div class="tags-box">
+            <span class="tag">HTML5 / CSS3</span>
+            <span class="tag tag-blue">MySQL</span>
+            <span class="tag">cPanel</span>
+            <span class="tag">APIs REST</span>
+          </div>
+
+          <div class="tag-group-title">Herramientas</div>
+          <div class="tags-box">
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Redes WiFi/LAN</span>
+            <span class="tag">VS Code</span>
+          </div>
+        </section>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Competencias</h2>
+          <ul class="item-bullets" style="padding-left: 12px;">
+            <li>Comunicación asertiva</li>
+            <li>Trabajo en equipo & Scrum</li>
+            <li>Resolución de problemas</li>
+            <li>Capacidad de aprendizaje</li>
+          </ul>
+        </section>
+
+        <section class="sec-block">
+          <h2 class="sec-title">Idiomas</h2>
+          <div style="font-size: 10px; color: #334155; line-height: 1.45;">
+            <div><strong>Español:</strong> Nativo</div>
+            <div><strong>Inglés:</strong> Básico (A1, TOEIC Bridge)</div>
+          </div>
+        </section>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
+
